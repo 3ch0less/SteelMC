@@ -283,6 +283,16 @@ fn validate_allows_extended_view_distance_with_opt_in() {
 }
 
 #[test]
+fn validate_allows_simulation_distance_zero() {
+    let config_toml = DEFAULT_CONFIG.replace("simulation_distance = 10", "simulation_distance = 0");
+    let config: SteelConfig = toml::from_str(&config_toml).expect("config parses");
+
+    validate(&config.server).expect("simulation distance of zero validates");
+    assert_eq!(config.server.simulation_distance, 0);
+    assert_eq!(config.server.into_runtime_config().simulation_distance, 0);
+}
+
+#[test]
 fn validate_rejects_view_distance_above_supported_ticket_range() {
     let config_toml = DEFAULT_CONFIG
         .replace(

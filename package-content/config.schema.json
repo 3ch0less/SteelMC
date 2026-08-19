@@ -36,8 +36,8 @@
         },
         "simulation_distance": {
           "type": "integer",
-          "description": "Maximum simulation distance in chunks",
-          "minimum": 1,
+          "description": "Simulation distance in chunks. Lower values reduce server work by restricting entity updates to fewer chunks around the player. At 0, only the player's current chunk receives entity updates.",
+          "minimum": 0,
           "maximum": 128,
           "default": 10
         },
